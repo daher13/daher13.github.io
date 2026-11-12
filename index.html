@@ -386,21 +386,23 @@ footer{padding:26px 0 44px; color:var(--ink-dim); font-family:var(--font-mono); 
     if (EN[key]) items.push({ node: n, pt: n.nodeValue, key });
   }
 
-  function setLang(lang) {
+  function setLang(lang, persist) {
     items.forEach(i => { i.node.nodeValue = lang === 'en' ? i.pt.replace(i.key, EN[i.key]) : i.pt; });
     document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
     document.title = META[lang][0];
     metaDesc.content = META[lang][1];
     document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    try { localStorage.setItem('lang', lang); } catch (e) {}
+    if (persist) { try { localStorage.setItem('lang', lang); } catch (e) {} }
   }
 
-  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang, true)));
 
-  // English by default; a saved choice overrides it
-  let saved = 'en';
-  try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
-  setLang(saved === 'pt' ? 'pt' : 'en');
+  // Saved choice wins; otherwise follow the browser language (Portuguese -> PT, anything else -> EN)
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  const browserLang = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'])
+    .some(l => /^pt\b/i.test(l)) ? 'pt' : 'en';
+  setLang(saved === 'pt' || saved === 'en' ? saved : browserLang);
 })();
 </script>
 <script>
