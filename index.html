@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Guilherme Daher — DevOps, Cloud e Infraestrutura. Automação, containers, Kubernetes, CI/CD e cloud para projetos modernos e confiáveis.">
-<title>Guilherme Daher — DevOps, Cloud & Infraestrutura</title>
+<meta name="description" content="Guilherme Daher — DevOps, Cloud and Infrastructure. Automation, containers, Kubernetes, CI/CD and cloud for modern, reliable projects.">
+<title>Guilherme Daher — DevOps, Cloud & Infrastructure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,12 +35,15 @@ a{color:inherit; text-decoration:none}
 .wrap{width:min(calc(100% - 40px),1120px); margin:auto}
 .hairline{border-top:1px solid var(--line)}
 
-nav{height:72px; display:flex; align-items:center; justify-content:space-between}
-.brand{font-family:var(--font-mono); font-size:16px; letter-spacing:.02em; color:var(--ink)}
+nav{height:72px; display:flex; align-items:center; justify-content:space-between; gap:26px}
+.brand{font-family:var(--font-mono); font-size:16px; letter-spacing:.02em; color:var(--ink); margin-right:auto}
 .brand b{font-weight:500; color:var(--blue)}
 .navlinks{display:flex; gap:26px; font-size:16px; color:var(--ink-dim)}
 .navlinks a{transition:color .15s}
 .navlinks a:hover{color:var(--ink)}
+.lang{display:flex; gap:4px; font-family:var(--font-mono); font-size:13px}
+.lang button{background:none; border:1px solid var(--line); border-radius:3px; color:var(--ink-dim); padding:5px 9px; cursor:pointer; font:inherit}
+.lang button.active{border-color:var(--blue); color:var(--ink)}
 
 .hero{padding:64px 0 30px; display:grid; grid-template-columns:1.15fr .85fr; gap:50px; align-items:center}
 .tag{font-family:var(--font-mono); font-size:14px; color:var(--blue); margin:0 0 18px}
@@ -132,6 +135,10 @@ footer{padding:26px 0 44px; color:var(--ink-dim); font-family:var(--font-mono); 
       <a href="#projetos">projetos</a>
       <a href="#sobre">sobre</a>
       <a href="#contato">contato</a>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="pt">PT</button>
     </div>
   </nav>
 
@@ -306,5 +313,90 @@ footer{padding:26px 0 44px; color:var(--ink-dim); font-family:var(--font-mono); 
     <span>linux · cloud · automation</span>
   </footer>
 </div>
+
+<script>
+(() => {
+  // PT -> EN dictionary (keys are the trimmed Portuguese text nodes)
+  const EN = {
+    "o que faço":"what I do","projetos":"projects","sobre":"about","contato":"contact",
+    "devops — cloud — infraestrutura":"devops — cloud — infrastructure",
+    "Infraestrutura projetada para escalar com segurança.":"Infrastructure designed to scale securely.",
+    "Especialista em DevOps e Cloud, projeto e automatizo ambientes de infraestrutura confiáveis, seguros e prontos para produção — do provisionamento ao monitoramento.":"DevOps and Cloud specialist. I design and automate reliable, secure, production-ready infrastructure environments — from provisioning to monitoring.",
+    "Áreas de atuação":"Areas of expertise",
+    "Serviços de infraestrutura, automação e operação, voltados a reduzir risco operacional e tempo de deploy.":"Infrastructure, automation and operations services focused on reducing operational risk and deployment time.",
+    "Cloud & Infraestrutura":"Cloud & Infrastructure",
+    "Projeto e implantação de ambientes em AWS, Azure e GCP, com definição de redes, controle de acesso (IAM) e serviços gerenciados.":"Design and deployment of environments on AWS, Azure and GCP, including network design, access control (IAM) and managed services.",
+    "Implementação de pipelines de build, teste e deploy, integrando código e infraestrutura em um processo auditável.":"Implementation of build, test and deploy pipelines, integrating code and infrastructure into an auditable process.",
+    "Containerização de aplicações e orquestração de workloads em produção, do ambiente local a clusters gerenciados.":"Application containerization and production workload orchestration, from local environments to managed clusters.",
+    "Infraestrutura como código":"Infrastructure as Code",
+    "Modelagem de ambientes de forma declarativa e versionada, reduzindo risco de divergência entre ambientes.":"Declarative, versioned environment modeling that reduces the risk of drift between environments.",
+    "Desenvolvimento e publicação de sites e aplicações com domínio próprio, certificado HTTPS e automação do processo de deploy.":"Development and publishing of websites and applications with a custom domain, HTTPS certificate and automated deployment.",
+    "Documentação técnica":"Technical documentation",
+    "Produção de documentação e guias técnicos que registram decisões de arquitetura e facilitam a manutenção.":"Technical documentation and guides that record architecture decisions and make maintenance easier.",
+    "Projetos em destaque":"Featured projects",
+    "Da infraestrutura à apresentação digital: exemplos de entregas completas, ponta a ponta.":"From infrastructure to digital presence: examples of complete, end-to-end deliveries.",
+    "infraestrutura":"infrastructure",
+    "Plataforma cloud automatizada":"Automated cloud platform",
+    "Implementação de referência que demonstra a integração entre provisionamento de infraestrutura, containerização e entrega contínua.":"Reference implementation demonstrating the integration of infrastructure provisioning, containerization and continuous delivery.",
+    "Rede cloud com arquitetura segmentada":"Cloud network with segmented architecture",
+    "Infraestrutura provisionada com Terraform":"Infrastructure provisioned with Terraform",
+    "Aplicação containerizada":"Containerized application",
+    "Pipeline de CI/CD baseado em Git":"Git-based CI/CD pipeline",
+    "Deploy em Kubernetes ou serverless":"Deployment on Kubernetes or serverless",
+    "Próximas etapas: observabilidade, hardening de segurança e estratégia de deploy blue/green.":"Next steps: observability, security hardening and a blue/green deployment strategy.",
+    "desenvolvimento":"development",
+    "Presença digital profissional":"Professional digital presence",
+    "Desenvolvimento de páginas institucionais pensadas para transmitir credibilidade, eficiência e representar a marca com precisão — prontas para publicar e usar como cartão de visitas digital do seu negócio.":"Development of institutional pages designed to convey credibility and efficiency and to represent your brand accurately — ready to publish and use as your business's digital business card.",
+    "Identidade visual exclusiva, sem template genérico":"Unique visual identity, no generic templates",
+    "Performance otimizada, sem frameworks pesados":"Optimized performance, no heavy frameworks",
+    "Layout responsivo para qualquer dispositivo":"Responsive layout for any device",
+    "Domínio próprio com certificado HTTPS":"Custom domain with HTTPS certificate",
+    "Pronto para publicar em poucos dias":"Ready to publish in just a few days",
+    "Ideal para consultorias, freelancers e pequenas empresas que precisam de uma presença online séria.":"Ideal for consultancies, freelancers and small businesses that need a serious online presence.",
+    "Sobre mim":"About me",
+    "Robustez não exige complexidade desnecessária.":"Robustness doesn't require unnecessary complexity.",
+    "Profissional de tecnologia especializado em DevOps, cloud e infraestrutura, com atuação em Linux, automação, redes, containers e plataformas cloud.":"Technology professional specialized in DevOps, cloud and infrastructure, working with Linux, automation, networking, containers and cloud platforms.",
+    "Trabalho com visão de sistema completo — do código à pipeline, da rede à operação — para entregar soluções que sejam simples de reproduzir, auditar e manter ao longo do tempo.":"I work with a full-system view — from code to pipeline, from network to operations — to deliver solutions that are simple to reproduce, audit and maintain over time.",
+    "Automação antes da repetição manual":"Automation before manual repetition",
+    "Infraestrutura versionada e auditável":"Versioned, auditable infrastructure",
+    "Observabilidade desde a concepção":"Observability from the start",
+    "Documentação como parte da entrega":"Documentation as part of the delivery",
+    "disponível para novos projetos":"available for new projects",
+    "Vamos resolver o próximo desafio de infraestrutura da sua empresa?":"Shall we solve your company's next infrastructure challenge?",
+    "Atendo projetos de implantação de infraestrutura, reestruturação de ambientes existentes, automação de deployments e desenvolvimento de presença web profissional.":"I take on infrastructure deployment projects, restructuring of existing environments, deployment automation and professional web presence development.",
+    "Solicitar orçamento":"Request a quote"
+  };
+  const metaDesc = document.querySelector('meta[name=description]');
+  const META = {
+    en: [document.title, metaDesc.content],
+    pt: ["Guilherme Daher — DevOps, Cloud & Infraestrutura", "Guilherme Daher — DevOps, Cloud e Infraestrutura. Automação, containers, Kubernetes, CI/CD e cloud para projetos modernos e confiáveis."]
+  };
+
+  // Collect translatable text nodes once, remembering the original (PT) text
+  const items = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let n; (n = walker.nextNode());) {
+    if (n.parentElement.closest('script,.lang')) continue;
+    const key = n.nodeValue.trim();
+    if (EN[key]) items.push({ node: n, pt: n.nodeValue, key });
+  }
+
+  function setLang(lang) {
+    items.forEach(i => { i.node.nodeValue = lang === 'en' ? i.pt.replace(i.key, EN[i.key]) : i.pt; });
+    document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
+    document.title = META[lang][0];
+    metaDesc.content = META[lang][1];
+    document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  // English by default; a saved choice overrides it
+  let saved = 'en';
+  try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
+  setLang(saved === 'pt' ? 'pt' : 'en');
+})();
+</script>
 </body>
 </html>
